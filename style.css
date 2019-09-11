@@ -1,0 +1,124 @@
+body {
+    background: #323232;
+    margin-top: 31px;
+}
+
+/* grid */
+.container {
+    width: 73vw;
+    height: 300px;
+    margin: 100px auto;
+    max-width: 897px;
+    background: #262525;
+    color: white;
+    display: grid;
+    grid-template-columns: 1fr 0.5fr 0.5fr 1fr 0.5fr 0.5fr 1fr;
+    grid-template-rows: 20px 48px 208px 118px;
+    grid-template-areas: ". . . . . . ." "slc-c slc-c c-wheel c-wheel c-wheel . ." "drpdwn drpdwn c-wheel c-wheel c-wheel sb sb" "sw1 sw2 sw2 d-c sw3 sw3 sw4";
+}
+
+/* select color button */
+.select-color-button {
+    grid-area: slc-c;
+    margin-left: 24px;
+    width: 180px;
+    height: 32px;
+    background-color: #323232;
+    color: white;
+    text-align: start;
+    font-size: 16px;
+    border: 1px solid #4d4d4d;
+}
+
+.select-color-label {
+    padding-left: 16px;
+    text-align: start;
+    font-size: 16px;
+}
+
+.select-color-swatch {
+    margin: 2px 0 2px 30px;
+}
+
+/* drop down button */
+.drop-down-button {
+    grid-area: drpdwn;
+    margin-left: 24px;
+    position: relative;
+    display: inline-block;
+}
+
+.display-palette-button {
+    width: 180px;
+    background-color: #323232;
+    color: white;
+    padding: 8px 0 8px 16px;
+    text-align: start;
+    font-size: 16px;
+    border: 1px solid #4d4d4d;
+}
+
+.drop-down-content {
+    width: 180px;
+    display: none;
+    position: absolute;
+    background-color: #323232;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.7);
+    z-index: 1;
+    margin: 0;
+}
+
+.drop-down-content div {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.drop-down-content div:hover {background-color: #262525; color: #03A5FC;}
+
+.drop-down-button:hover .drop-down-content {display: block;}
+
+/* rest of grid items */
+.color-wheel-img {
+    grid-area: c-wheel;
+    width: 250px;
+    height: 250px;
+    justify-self: center;
+}
+
+.subhead {
+    grid-area: sb;
+    justify-self: end;
+    margin-right: 24px;
+    align-self: center;
+}
+
+.swatch1 {
+    grid-area: sw1;
+    background: #02f5f5;
+}
+
+.swatch2 {
+    grid-area: sw2;
+    background: #02d1d1;
+}
+
+.demoColor {
+    grid-area: d-c;
+    background: #02a3a3;
+    border: 2px solid white;
+}
+
+.swatch3 {
+    grid-area: sw3;
+    background: #017373;
+}
+
+.swatch4 {
+    grid-area: sw4;
+    background: #013636;
+}
+
+.swatch:hover {border: 2px solid white}
+
