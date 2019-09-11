@@ -157,4 +157,5 @@ const doSetBlendType = (typeOfColorShift) => {
             return;
         }
     }
+
 };
