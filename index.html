@@ -11,31 +11,31 @@
 <body>
 <div class="container" id="container">
     <div class="select-color-button" id="displayColor">
-        <label class="select-color-label"for="colorWell">Select color</label>
-        <input type="color" class="select-color-swatch"id="colorWell" value="#03c9d3" onchange="doSetNewColor(this.value)">
+        <label class="select-color-label" for="colorWell">Select color</label>
+        <input type="color" class="select-color-swatch" id="colorWell" value="#03c9d3" onchange="doSetNewColor(this.value)">
     </div>
     <div class="drop-down-button">
         <button class="display-palette-button">Select palette</button>
         <div class="drop-down-content">
-            <div onclick="doSetBlendType(this.innerText)">Analogous</div>
-            <div onclick="doSetBlendType(this.innerText)">Monochromatic</div>
-            <div onclick="doSetBlendType(this.innerText)">Triad</div>
-            <div onclick="doSetBlendType(this.innerText)">Complementary</div>
-            <div onclick="doSetBlendType(this.innerText)">Compound</div>
-            <div onclick="doSetBlendType(this.innerText)">Shades</div>
+            <div onclick="doSetColorScheme(this.innerText)">Analogous</div>
+            <div onclick="doSetColorScheme(this.innerText)">Monochromatic</div>
+            <div onclick="doSetColorScheme(this.innerText)">Triad</div>
+            <div onclick="doSetColorScheme(this.innerText)">Complementary</div>
+            <div onclick="doSetColorScheme(this.innerText)">Compound</div>
+            <div onclick="doSetColorScheme(this.innerText)">Shades</div>
         </div>
     </div>
     <img class="color-wheel-img" src="wheel.png" alt="color-wheel-spectrum">
     <div class="subhead">
         <h3 class="HEX-value" id="hexColor">HEX: <span>#03c9d3</span></h3>
-        <h3 class="RGB-value" id="rgbColor">RGB: <span>3, 201, 211</span></h3>
-        <h3 class="HSL-value" id="hslColor">HSL: <span>183°, 97%, 42%</span></h3>
+        <h3 class="RGB-value" id="rgbColor">RGB: <span>(3, 201, 211)</span></h3>
+        <h3 class="HSL-value" id="hslColor">HSL: <span>183, 97%, 42%</span></h3>
     </div>
-    <div class="swatch1 swatch" id="swatch1" onclick="doSetNewColor(this.style.background)"></div>
-    <div class="swatch2 swatch" id="swatch2" onmouseover="doSetNewColor(this.style.background)"></div>
-    <div class="demoColor swatch" id="demoColor"></div>
-    <div class="swatch3 swatch" id="swatch4" onmouseover="doSetNewColor(this.style.background)"></div>
-    <div class="swatch4 swatch" id="swatch5" onmouseover="doSetNewColor(this.style.background)"></div>
+    <div class="swatch1 swatch" id="swatch1" onmouseover="doSetNewColorHover(this.style.background)"></div>
+    <div class="swatch2 swatch" id="swatch2" onmouseover="doSetNewColorHover(this.style.background)"></div>
+    <div class="demoColor swatch" id="demoColor" onmouseover="doSetNewColorHover(this.style.background)"></div>
+    <div class="swatch3 swatch" id="swatch4" onmouseover="doSetNewColorHover(this.style.background)"></div>
+    <div class="swatch4 swatch" id="swatch5" onmouseover="doSetNewColorHover(this.style.background)"></div>
 </div>
 </body>
 </html>
