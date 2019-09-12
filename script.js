@@ -3,9 +3,15 @@ let lastHSLColorSelected = {
     s: 0,
     l: 0
 };
+let lastHEXColorSelected = '';
+let lastRGBColorSelected = {
+    r: 0,
+    g: 0,
+    b: 0,
+};
 
 // Source: https://stackoverflow.com/questions/57319394/how-to-automatically-change-text-color-base-on-background-color-in-angularjs
-function convertHexToRGB( colour ) {
+function convertHexToRGB(colour) {
     let r,g,b;
     if ( colour.charAt(0) === '#' ) {
         colour = colour.substr(1);
@@ -24,12 +30,16 @@ function convertHexToRGB( colour ) {
     r = parseInt( r,16 );
     g = parseInt( g,16 );
     b = parseInt( b ,16);
-    document.getElementById('rgbColor').children[0].textContent = '(' + r + ',' + g + ',' + b + ')';
-    rgbToHsl(r, g, b)
+    document.getElementById('rgbColor').children[0].textContent = 'rgb(' + r + ',' + g + ',' + b + ')';
+    lastRGBColorSelected = {
+        r: r,
+        g: g,
+        b: b,
+    }
 }
 
 // source rgb to hsl https://github.com/JuhQ/rgb-to-hsl/blob/master/src/index.coffee
-function rgbToHsl(r, g, b){
+function convertRGBToHSL(r, g, b){
     r /= 255;
     g /= 255;
     b /= 255;
@@ -57,34 +67,41 @@ function rgbToHsl(r, g, b){
         s: Math.floor(s * 100),
         l: Math.floor(l * 100),
     };
-    document.getElementById('hslColor').children[0].textContent = `(${lastHSLColorSelected.h}, ${(lastHSLColorSelected.s)}%, ${(lastHSLColorSelected.l)}%)`
+    document.getElementById('hslColor').children[0].textContent = `hsl(${lastHSLColorSelected.h}, ${(lastHSLColorSelected.s)}%, ${(lastHSLColorSelected.l)}%)`
 }
 
-// convert RGB to HEX
-function componentToHex(c) {
-    let hex = c.toString(16);
-    return hex.length === 1 ? "0" + hex : hex;
-}
+function convertRgbToHex(colour) {
+    // convert RGB to HEX
+    let RGBArray = colour.match(/\d+/g); //Source: https://stackoverflow.com/questions/9585973/javascript-regular-expression-for-rgb-values
+    const rgbToHex = function (rgb) { // Source: https://campushippo.com/lessons/how-to-convert-rgb-colors-to-hexadecimal-with-javascript-78219fdb
+        let hex = Number(rgb).toString(16);
+        if (hex.length < 2) {
+            hex = "0" + hex;
+        }
+        return hex;
+    };
 
-function convertRgbToHex(r, g, b) {
-    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+    lastHEXColorSelected = "#" + rgbToHex(RGBArray[0]) + rgbToHex(RGBArray[1]) + rgbToHex(RGBArray[2]);
+
 }
 
 // function display color values
 function doSetNewColor(newColor) {
     if(newColor) {
+        convertHexToRGB(newColor);
         document.getElementById('hexColor').children[0].textContent = newColor;
         document.getElementById('demoColor').style.background = newColor;
-        convertHexToRGB(newColor);
+        convertRGBToHSL(lastRGBColorSelected.r, lastRGBColorSelected.g, lastRGBColorSelected.b);
     }
 }
 
 // function display color values on hover
 function doSetNewColorHover(newColor) {
-    if(newColor) {
-        document.getElementById('rgbColor').children[0].textContent = newColor;
-        document.getElementById('hexColor').children[0].textContent = convertRgbToHex(newColor);
-        document.getElementById('hslColor').children[0].textContent = rgbToHsl(newColor);
+        if(newColor) {
+            convertRgbToHex(newColor);
+            convertRGBToHSL(lastRGBColorSelected.r, lastRGBColorSelected.g, lastRGBColorSelected.b);
+            convertHexToRGB(lastHEXColorSelected);
+            document.getElementById('hexColor').children[0].textContent = lastHEXColorSelected;
     }
 }
 // functions blend steps from max color value to the lowest one
