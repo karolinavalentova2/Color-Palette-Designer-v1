@@ -11,7 +11,12 @@ function convertHexToRGB( colour ) {
         colour = colour.substr(1);
     }
     if ( colour.length === 3 ) {
-        colour = colour.substr(0,1) + colour.substr(0,1) + colour.substr(1,2) + colour.substr(1,2) + colour.substr(2,3) + colour.substr(2,3);
+        colour = colour.substr(0,1)
+            + colour.substr(0,1)
+            + colour.substr(1,2)
+            + colour.substr(1,2)
+            + colour.substr(2,3)
+            + colour.substr(2,3);
     }
     r = colour.charAt(0) + '' + colour.charAt(1);
     g = colour.charAt(2) + '' + colour.charAt(3);
@@ -55,16 +60,34 @@ function rgbToHsl(r, g, b){
     document.getElementById('hslColor').children[0].textContent = `(${lastHSLColorSelected.h}, ${(lastHSLColorSelected.s)}%, ${(lastHSLColorSelected.l)}%)`
 }
 
+// convert RGB to HEX
+function componentToHex(c) {
+    let hex = c.toString(16);
+    return hex.length === 1 ? "0" + hex : hex;
+}
+
+function convertRgbToHex(r, g, b) {
+    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+}
+
+// function display color values
 function doSetNewColor(newColor) {
-    let test = document.getElementById('swatch1');
     if(newColor) {
         document.getElementById('hexColor').children[0].textContent = newColor;
         document.getElementById('demoColor').style.background = newColor;
-        document.getElementById('container').style.borderColor = newColor;
-        convertHexToRGB(newColor)
+        convertHexToRGB(newColor);
     }
 }
 
+// function display color values on hover
+function doSetNewColorHover(newColor) {
+    if(newColor) {
+        document.getElementById('rgbColor').children[0].textContent = newColor;
+        document.getElementById('hexColor').children[0].textContent = convertRgbToHex(newColor);
+        document.getElementById('hslColor').children[0].textContent = rgbToHsl(newColor);
+    }
+}
+// functions blend steps from max color value to the lowest one
 let blendHue = (step) => {
     let newColor = lastHSLColorSelected.h - step;
 
@@ -95,8 +118,8 @@ let blendLight = (step) => {
     } else return lastHSLColorSelected.l - step;
 };
 
-const doSetBlendType = (typeOfColorShift) => {
-
+// functions display color schemes
+const doSetColorScheme = (typeOfColorShift) => {
     switch (typeOfColorShift) {
         case 'Analogous': {
             const colorBlocks = document.querySelectorAll('.swatch');
@@ -157,5 +180,4 @@ const doSetBlendType = (typeOfColorShift) => {
             return;
         }
     }
-
 };
