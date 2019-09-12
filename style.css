@@ -90,8 +90,9 @@ body {
 .subhead {
     grid-area: sb;
     justify-self: end;
-    margin-right: 24px;
+    margin: 67px 24px 0 0;
     align-self: center;
+    font-size: 14px;
 }
 
 .swatch1 {
@@ -107,7 +108,7 @@ body {
 .demoColor {
     grid-area: d-c;
     background: #02a3a3;
-    border: 2px solid white;
+    border: 1px solid white;
 }
 
 .swatch3 {
@@ -120,5 +121,35 @@ body {
     background: #013636;
 }
 
-.swatch:hover {border: 2px solid white}
+.swatch:hover {border: 3px solid white}
 
+/* media query  */
+@media (max-width: 940px) {
+    .container {
+        width: 290px;
+        height: 393px;
+        margin: 100px auto;
+        max-width: 897px;
+        background: #262525;
+        color: white;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: 20px 48px 20px 188px 118px;
+        grid-template-areas:
+                ". . . . ."
+                "slc-c slc-c slc-c slc-c slc-c"
+                "drpdwn drpdwn drpdwn drpdwn drpdwn"
+                "sb sb sb sb sb"
+                "sw1 sw2 d-c sw3 sw4";
+    }
+
+    .color-wheel-img {
+        display: none;
+    }
+
+    .subhead {
+        margin: 0 0 0 24px;
+        align-self: end;
+        justify-self: start;
+    }
+}
